@@ -172,7 +172,7 @@ class SSHKit::Backend::ConnectionPool
   def silently_close_connection(connection)
     return false unless connection.respond_to?(:close)
     return false if connection.respond_to?(:closed?) && connection.closed?
-    Timeout::timeout 5 { connection.close }
+    Timeout::timeout(5) { connection.close }
     true
   rescue StandardError
     false
